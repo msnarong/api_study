@@ -1,35 +1,37 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <title>각국 해외 입국자 조치사항</title>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <style>
-        #write #box{
-            width: 300px;
-            margin: 0 auto;
-        }
+      #box {
+        width: 300px;
+        margin: 0 auto;
+      }
+      #country {
+        width: 110px;
+      }
     </style>
-</head>
-
-<body>
-    <div id="write">
-        <div id="box">
-            <h2>각국 해외 입국자 조치사항</h2>
-            <hr>
-            <p>나라 이름(한글): <input type="text" id="country" style="vertical-align: bottom;"></p>
-            <p>ISO 코드(2글자): <input type="text" id="countryIsoCode" style="vertical-align: bottom;"></p>
-            <form style="text-align: center;">
-                <input type="button" value="submit" id="button" style="align-content: center;">
-            </form>
-        </div>
+  </head>
+  <body>
+    <div id="box">
+      <h2>각국 해외 입국자 조치사항</h2>
+      <hr />
+      <p>
+        나라 이름(한글):
+        <input type="text" id="country" />
+        <input type="button" value="submit" id="button" />
+      </p>
     </div>
-    <div>
-        <h2 id="title" style="text-align: center;"></h2>
-        <span id="info"></span>
+    <hr />
+    <div style="text-align: center">
+      <input type="button" id="flagbutton" value="국기 접기" />
     </div>
-    <script src="test_script.js">
-    </script>
-</body>
-
+    <div id="flag"></div>
+    <div id="showInfo">
+      <h2 id="title" style="text-align: center"></h2>
+      <span id="info"></span>
+    </div>
+    <script src="test_script.js"></script>
+  </body>
 </html>
