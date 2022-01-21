@@ -5,13 +5,7 @@ const title = document.querySelector('#title');
 const flag = document.querySelector('#flag');
 const flagbutton = document.querySelector('#flagbutton');
 
-// 버튼 눌렀을때 실행하는 함수
 function inputCountryName(countryName) {
-  document.querySelector('#country').value = countryName;
-  // 나라 이름과 ISO 코드중 하나라도 입력 안 했을경우
-  if (countryName == '') {
-    alert('나라 이름을 입력해주세요');
-  }
   // API 활용 코드
   const xhr = new XMLHttpRequest();
   const EncodingKey = 'DbakMaVDHqAIbWiwMG9Hm67W398h5mBPRRUwiqQALm0frxh4fCLVEvgeevHaSz8OjHFQ6AtSyaofLHpwbsnQsA%3D%3D';
@@ -28,13 +22,12 @@ function inputCountryName(countryName) {
   xhr.onreadystatechange = function () {
     if (this.readyState == 4) {
       console.log(countryName);
-      const countrydata = JSON.parse(this.response).data[0].html_origin_cn;
-      if (countrydata != undefined) {
+      try{
+        const countrydata = JSON.parse(this.response).data[0].html_origin_cn;
         title.innerHTML = '<hr>' + countryName + ' 해외 입국자 조치사항';
         showInfo.innerHTML = countrydata;
-      } else {
-        // 아닌경우 오류 알림
-        alert('없는 나라입니다');
+      } catch(error){
+        alert('※ 정보가 없는 나라 혹은 나라 이름을 잘못 입력 ※');
         title.innerHTML = '';
         showInfo.innerHTML = '';
       }
@@ -81,8 +74,14 @@ function inputCountryFlag() {
   };
   xhr.send('');
 }
-button.addEventListener('click', inputCountryName); // 버튼 눌렀을때 이벤트 처리
+// 나라 이름을 직접 입력하여 제출 버튼을 누르는 경우 이벤트 처리
+button.addEventListener('click', () => {
+  const countryName = document.querySelector('#country').value;
+  inputCountryName(countryName);
+}); 
+// 웹 페이지가 로드 되면 발생하는 이벤트 처리
 window.addEventListener('load', inputCountryFlag);
+// flagbutton 을 눌렀을때 이벤트 처리
 flagbutton.addEventListener('click', function(){
   if(flag.style.display == 'none'){
     flagbutton.value = '국기 접기';
